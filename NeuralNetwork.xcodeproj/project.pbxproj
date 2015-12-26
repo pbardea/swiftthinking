@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9FAC51CC1C2E564600A2DF83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51CB1C2E564600A2DF83 /* main.swift */; };
+		9FAC51D51C2E56DE00A2DF83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51D41C2E56DE00A2DF83 /* main.swift */; };
+		9FAC51DD1C2E57A200A2DF83 /* NNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51DC1C2E57A200A2DF83 /* NNTests.swift */; };
+		9FAC51E21C2E58D100A2DF83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51D41C2E56DE00A2DF83 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,11 +26,21 @@
 
 /* Begin PBXFileReference section */
 		9FAC51C81C2E564600A2DF83 /* NeuralNetwork */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NeuralNetwork; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FAC51CB1C2E564600A2DF83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9FAC51D41C2E56DE00A2DF83 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9FAC51DA1C2E57A200A2DF83 /* NNTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NNTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FAC51DC1C2E57A200A2DF83 /* NNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNTests.swift; sourceTree = "<group>"; };
+		9FAC51DE1C2E57A200A2DF83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9FAC51C51C2E564600A2DF83 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FAC51D71C2E57A200A2DF83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				9FAC51CA1C2E564600A2DF83 /* NeuralNetwork */,
+				9FAC51DB1C2E57A200A2DF83 /* NNTests */,
 				9FAC51C91C2E564600A2DF83 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				9FAC51C81C2E564600A2DF83 /* NeuralNetwork */,
+				9FAC51DA1C2E57A200A2DF83 /* NNTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +71,18 @@
 		9FAC51CA1C2E564600A2DF83 /* NeuralNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				9FAC51CB1C2E564600A2DF83 /* main.swift */,
+				9FAC51D41C2E56DE00A2DF83 /* main.swift */,
 			);
 			path = NeuralNetwork;
+			sourceTree = "<group>";
+		};
+		9FAC51DB1C2E57A200A2DF83 /* NNTests */ = {
+			isa = PBXGroup;
+			children = (
+				9FAC51DC1C2E57A200A2DF83 /* NNTests.swift */,
+				9FAC51DE1C2E57A200A2DF83 /* Info.plist */,
+			);
+			path = NNTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +105,23 @@
 			productReference = 9FAC51C81C2E564600A2DF83 /* NeuralNetwork */;
 			productType = "com.apple.product-type.tool";
 		};
+		9FAC51D91C2E57A200A2DF83 /* NNTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FAC51DF1C2E57A200A2DF83 /* Build configuration list for PBXNativeTarget "NNTests" */;
+			buildPhases = (
+				9FAC51D61C2E57A200A2DF83 /* Sources */,
+				9FAC51D71C2E57A200A2DF83 /* Frameworks */,
+				9FAC51D81C2E57A200A2DF83 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NNTests;
+			productName = NNTests;
+			productReference = 9FAC51DA1C2E57A200A2DF83 /* NNTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +133,9 @@
 				ORGANIZATIONNAME = "pbardea stdios";
 				TargetAttributes = {
 					9FAC51C71C2E564600A2DF83 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					9FAC51D91C2E57A200A2DF83 = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -110,16 +153,36 @@
 			projectRoot = "";
 			targets = (
 				9FAC51C71C2E564600A2DF83 /* NeuralNetwork */,
+				9FAC51D91C2E57A200A2DF83 /* NNTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9FAC51D81C2E57A200A2DF83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9FAC51C41C2E564600A2DF83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FAC51CC1C2E564600A2DF83 /* main.swift in Sources */,
+				9FAC51D51C2E56DE00A2DF83 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FAC51D61C2E57A200A2DF83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FAC51E21C2E58D100A2DF83 /* main.swift in Sources */,
+				9FAC51DD1C2E57A200A2DF83 /* NNTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,13 +272,40 @@
 		9FAC51D01C2E564600A2DF83 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		9FAC51D11C2E564600A2DF83 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9FAC51E01C2E57A200A2DF83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = NNTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pbardea.NNTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9FAC51E11C2E57A200A2DF83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = NNTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pbardea.NNTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -237,6 +327,14 @@
 			buildConfigurations = (
 				9FAC51D01C2E564600A2DF83 /* Debug */,
 				9FAC51D11C2E564600A2DF83 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9FAC51DF1C2E57A200A2DF83 /* Build configuration list for PBXNativeTarget "NNTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FAC51E01C2E57A200A2DF83 /* Debug */,
+				9FAC51E11C2E57A200A2DF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
