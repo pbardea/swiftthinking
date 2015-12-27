@@ -10,6 +10,7 @@
 		9FAC51D51C2E56DE00A2DF83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51D41C2E56DE00A2DF83 /* main.swift */; };
 		9FAC51DD1C2E57A200A2DF83 /* NNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51DC1C2E57A200A2DF83 /* NNTests.swift */; };
 		9FAC51E21C2E58D100A2DF83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51D41C2E56DE00A2DF83 /* main.swift */; };
+		9FC9E55A1C2FB71E00B3ADA6 /* LinearAlgebra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9E5591C2FB71E00B3ADA6 /* LinearAlgebra.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 		9FAC51DA1C2E57A200A2DF83 /* NNTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NNTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAC51DC1C2E57A200A2DF83 /* NNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNTests.swift; sourceTree = "<group>"; };
 		9FAC51DE1C2E57A200A2DF83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FC9E5591C2FB71E00B3ADA6 /* LinearAlgebra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearAlgebra.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				9FAC51D41C2E56DE00A2DF83 /* main.swift */,
+				9FC9E5591C2FB71E00B3ADA6 /* LinearAlgebra.swift */,
 			);
 			path = NeuralNetwork;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FAC51D51C2E56DE00A2DF83 /* main.swift in Sources */,
+				9FC9E55A1C2FB71E00B3ADA6 /* LinearAlgebra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +333,7 @@
 				9FAC51D11C2E564600A2DF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9FAC51DF1C2E57A200A2DF83 /* Build configuration list for PBXNativeTarget "NNTests" */ = {
 			isa = XCConfigurationList;
@@ -337,6 +342,7 @@
 				9FAC51E11C2E57A200A2DF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
