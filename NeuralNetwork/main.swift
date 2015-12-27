@@ -1,3 +1,4 @@
+
 //
 //  main.swift
 //  NeuralNetwork
@@ -87,54 +88,42 @@ class NeuronLayer {
     }
 }
 
-func linAlgTest() -> Void {
-    func testDotVector() -> Bool {
-        let a = [1.0, 2.0, 3.0]
-        let b = [3.0, 4.0, 5.0]
-        let result = dotVector(a, withB: b)
-        return result == 26
-    }
-    
-    func testDotMatrix() -> Bool {
-        let a = [[1.0, 2.0], [4.0, 5.0], [7.0, 8.0]]
-        let b = [[10.0, 11.0, 12.0], [4.0, 6.0, 7.0]]
-        let result = dotMatrix(a, withB: b)
-        return result == [[18.0, 23.0, 26.0], [60.0, 74.0, 83.0], [102.0, 125.0, 140.0]]
-    }
-    
-    assert(testDotMatrix())
-    assert(testDotVector())
-}
-
 class NeuralNetwork {
     let layer1: NeuronLayer
     let layer2: NeuronLayer
+    let layer3: NeuronLayer
     
-    init(layer1: NeuronLayer, layer2: NeuronLayer) {
+    init(layer1: NeuronLayer, layer2: NeuronLayer, layer3: NeuronLayer) {
         self.layer1 = layer1
         self.layer2 = layer2
+        self.layer3 = layer3
     }
     
     func sigmoid(x: Double) -> Double {
-        return 1 / (1 - exp(-1*x))
+        return 1 / (1 + exp(-1*x))
     }
     
     func sigmoidDerivative(x: Double) -> Double {
-        return x * (1-x)
+        return x * (1 - x)
     }
     
-    func think(inputs: Matrix) -> (Matrix, Matrix) {
+    func think(inputs: Matrix) -> (Matrix, Matrix, Matrix) {
         let outputFromLayer1 = apply(sigmoid, toMatrix: dotMatrix(inputs, withB: self.layer1.synaptic_weights))
         let outputFromLayer2 = apply(sigmoid, toMatrix: dotMatrix(outputFromLayer1, withB: self.layer2.synaptic_weights))
-        return (outputFromLayer1, outputFromLayer2)
+        let outputFromLayer3 = apply(sigmoid, toMatrix: dotMatrix(outputFromLayer2, withB: self.layer3.synaptic_weights))
+        
+        return (outputFromLayer1, outputFromLayer2, outputFromLayer3)
     }
     
     func train(trainingSetInputs: Matrix, trainingSetOutputs: Matrix, numberOfTrainingIterations: Int) -> Void {
         for _ in 0...numberOfTrainingIterations {
-            let outputFromLayer1, outputFromLayer2: Matrix
-            (outputFromLayer1, outputFromLayer2) = self.think(trainingSetInputs)
+            let outputFromLayer1, outputFromLayer2, outputFromLayer3: Matrix
+            (outputFromLayer1, outputFromLayer2, outputFromLayer3) = self.think(trainingSetInputs)
             
-            let layer2error: Matrix = matrixSub(trainingSetOutputs, withB: outputFromLayer2)
+            let layer3error: Matrix = matrixSub(trainingSetOutputs, withB: outputFromLayer3)
+            let layer3delta: Matrix = dotMatrix(layer3error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer3))
+            
+            let layer2error: Matrix = dotMatrix(layer3delta, withB: transpose(self.layer3.synaptic_weights))
             let layer2delta: Matrix = dotMatrix(layer2error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer2))
             
             let layer1error: Matrix = dotMatrix(layer2delta, withB: transpose(self.layer2.synaptic_weights))
@@ -142,9 +131,11 @@ class NeuralNetwork {
             
             let layer1adjustmnets: Matrix = dotMatrix(transpose(trainingSetInputs), withB: layer1delta)
             let layer2adjustments: Matrix = dotMatrix(transpose(outputFromLayer1), withB: layer2delta)
+            let layer3adjustments: Matrix = dotMatrix(transpose(outputFromLayer2), withB: layer3delta)
             
             self.layer1.synaptic_weights = matrixAdd(self.layer1.synaptic_weights, withB: layer1adjustmnets)
             self.layer2.synaptic_weights = matrixAdd(self.layer2.synaptic_weights, withB: layer2adjustments)
+            self.layer3.synaptic_weights = matrixAdd(self.layer3.synaptic_weights, withB: layer3adjustments)
         }
     }
     
@@ -156,10 +147,3 @@ class NeuralNetwork {
         print(layer2.synaptic_weights)
     }
 }
-
-func main() {
-    
-}
-
-
-main()
