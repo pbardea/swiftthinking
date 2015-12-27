@@ -5,5 +5,5 @@ before_install:
 - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
 
 script: 
-- xctool clean build -project SwiftSorts.xcodeproj -scheme NeuralNetwork
-- xctool test -project SwiftSorts.xcodeproj -scheme NNTests
+- xctool clean build -project NeuralNetwork.xcodeproj -scheme NeuralNetwork
+- xctool test -project NeuralNetwork.xcodeproj -scheme NNTests
