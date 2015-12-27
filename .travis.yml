@@ -1,0 +1,9 @@
+language: objective-c
+
+before_install: 
+- brew update
+- if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
+
+script: 
+- xctool clean build -project SwiftSorts.xcodeproj -scheme NeuralNetwork
+- xctool test -project SwiftSorts.xcodeproj -scheme NNTests
