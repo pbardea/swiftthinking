@@ -55,8 +55,7 @@ class NeuralNetwork {
     
     func train(trainingSetInputs: Matrix, trainingSetOutputs: Matrix, numberOfTrainingIterations: Int) -> Void {
         for _ in 0...numberOfTrainingIterations {
-            let outputFromLayer1, outputFromLayer2, outputFromLayer3: Matrix
-            (outputFromLayer1, outputFromLayer2, outputFromLayer3) = self.think(trainingSetInputs)
+            let (outputFromLayer1, outputFromLayer2, outputFromLayer3) = self.think(trainingSetInputs)
             
             let layer3error: Matrix = matrixSub(trainingSetOutputs, withB: outputFromLayer3)
             let layer3delta: Matrix = dotMatrix(layer3error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer3))
