@@ -33,7 +33,7 @@ func dotVector(a: [Double], withB b: [Double]) -> Double {
 
 func dotMatrix(a: Matrix, withB b: Matrix) -> [[Double]] {
     assert(b.count > 0)
-    return result = (0..<a.count).map { i in
+    return (0..<a.count).map { i in
         (0..<b[0].count).map { j in
             dotVector(getRow(i, ofMatrix: a), withB: getColumn(j, ofMatrix: b))
         }
@@ -55,11 +55,11 @@ func matrixOp(op: (Double, Double)->Double, onA a: Matrix, withB b: Matrix) -> M
 }
 
 func matrixSub(a: Matrix, withB b: Matrix) -> Matrix {
-    return result = matrixOp(-, onA: a, withB: b)
+    return matrixOp(-, onA: a, withB: b)
 }
 
 func matrixAdd(a: Matrix, withB b: Matrix) -> Matrix {
-    return result = matrixOp(+, onA: a, withB: b)
+    return matrixOp(+, onA: a, withB: b)
 }
 
 func apply(function: (Double)->Double, toMatrix a: Matrix) -> Matrix {

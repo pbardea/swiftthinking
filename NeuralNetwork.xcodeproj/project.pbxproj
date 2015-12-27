@@ -11,6 +11,7 @@
 		9FAC51DD1C2E57A200A2DF83 /* NNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51DC1C2E57A200A2DF83 /* NNTests.swift */; };
 		9FAC51E21C2E58D100A2DF83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC51D41C2E56DE00A2DF83 /* main.swift */; };
 		9FC9E55A1C2FB71E00B3ADA6 /* LinearAlgebra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9E5591C2FB71E00B3ADA6 /* LinearAlgebra.swift */; };
+		9FC9E55B1C2FB7E800B3ADA6 /* LinearAlgebra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC9E5591C2FB71E00B3ADA6 /* LinearAlgebra.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -186,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FAC51E21C2E58D100A2DF83 /* main.swift in Sources */,
+				9FC9E55B1C2FB7E800B3ADA6 /* LinearAlgebra.swift in Sources */,
 				9FAC51DD1C2E57A200A2DF83 /* NNTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
