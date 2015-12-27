@@ -45,7 +45,7 @@ class NNTests: XCTestCase {
         let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 1], [1, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
         let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 1, 1, 0, 0]]))
         
-        neural_network.train(training_set_inputs, trainingSetOutputs: training_set_outputs, numberOfTrainingIterations: 60000)
+        neural_network.train(training_set_inputs, trainingSetOutputs: training_set_outputs, numberOfTrainingIterations: 6)
         let (lev1, lev2, output) = neural_network.think([[1,1,0]])
         print("Predicted output for input [[1,1,0]]")
         print(lev1)
