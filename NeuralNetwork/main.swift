@@ -26,7 +26,46 @@ class NeuronLayer {
     }
 }
 
+extension Array {
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+}
+
 class NeuralNetwork {
+    let layers: [NeuronLayer]
+    
+    init(layers: [NeuronLayer]) {
+        self.layers = layers
+    }
+    
+    func sigmoid(x: Double) -> Double {
+        return 1 / (1 + exp(-1*x))
+    }
+    
+    func sigmoidDerivative(x: Double) -> Double {
+        return x * (1 - x)
+    }
+    
+    func think(inputs: Matrix) -> [Matrix] {
+        let synapticWeights = self.layers.map { $0.synaptic_weights }
+        
+        // accumulator looks like [inputs, outputFromLayer1
+        func recur(outputFromPreviousLayer: Matrix, withAccumulator accumulator: [Matrix], andSynapticDepth synapticDepth: Int) -> [Matrix] {
+            if let lastOut = accumulator.last, synapticLayer = synapticWeights[synapticDepth] {
+                let output = apply(sigmoid, toMatrix: dotMatrix(lastOut, withB: synapticLayer))
+                return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
+            } else {
+                return []
+            }
+            
+        }
+        
+        return recur(inputs, withAccumulator: [], andSynapticDepth: 0)
+    }
+}
+
+class ThreeLayerNeuralNetwork {
     let layer1: NeuronLayer
     let layer2: NeuronLayer
     let layer3: NeuronLayer
