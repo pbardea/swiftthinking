@@ -26,12 +26,6 @@ class NeuronLayer {
     }
 }
 
-extension Array {
-    subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
-    }
-}
-
 class NeuralNetwork {
     let layers: [NeuronLayer]
     
@@ -47,22 +41,49 @@ class NeuralNetwork {
         return x * (1 - x)
     }
     
+    func synapticWeightAtIndex(index: Int) -> Matrix? {
+        let synapticWeights = self.layers.map { $0.synaptic_weights } // TODO: DRY up this code
+        
+        return synapticWeights.indices ~= index ? synapticWeights[index] : nil
+    }
+    
     func think(inputs: Matrix) -> [Matrix] {
         let synapticWeights = self.layers.map { $0.synaptic_weights }
         
         // accumulator looks like [inputs, outputFromLayer1
         func recur(outputFromPreviousLayer: Matrix, withAccumulator accumulator: [Matrix], andSynapticDepth synapticDepth: Int) -> [Matrix] {
-            if let lastOut = accumulator.last, synapticLayer = synapticWeights[synapticDepth] {
+            if let lastOut = accumulator.last, synapticLayer = synapticWeightAtIndex(synapticDepth) {
                 let output = apply(sigmoid, toMatrix: dotMatrix(lastOut, withB: synapticLayer))
                 return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
             } else {
                 return []
             }
-            
         }
         
         return recur(inputs, withAccumulator: [], andSynapticDepth: 0)
     }
+    
+    func train(trainingSetInputs: Matrix, trainingSetOutputs: Matrix, numberOfTrainingIterations: Int) -> Void {
+        for _ in 0...numberOfTrainingIterations {
+            let layerOutputs = self.think(trainingSetInputs)
+            
+            let layer3error: Matrix = matrixSub(trainingSetOutputs, withB: outputFromLayer3)
+            let layer3delta: Matrix = dotMatrix(layer3error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer3))
+            
+            let layer2error: Matrix = dotMatrix(layer3delta, withB: transpose(self.layer3.synaptic_weights))
+            let layer2delta: Matrix = dotMatrix(layer2error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer2))
+            
+            let layer1error: Matrix = dotMatrix(layer2delta, withB: transpose(self.layer2.synaptic_weights))
+            let layer1delta: Matrix = dotMatrix(layer1error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer1))
+            
+            let layer1adjustmnets: Matrix = dotMatrix(transpose(trainingSetInputs), withB: layer1delta)
+            let layer2adjustments: Matrix = dotMatrix(transpose(outputFromLayer1), withB: layer2delta)
+            let layer3adjustments: Matrix = dotMatrix(transpose(outputFromLayer2), withB: layer3delta)
+            
+            self.layer1.synaptic_weights = matrixAdd(self.layer1.synaptic_weights, withB: layer1adjustmnets)
+            self.layer2.synaptic_weights = matrixAdd(self.layer2.synaptic_weights, withB: layer2adjustments)
+            self.layer3.synaptic_weights = matrixAdd(self.layer3.synaptic_weights, withB: layer3adjustments)
+        }
 }
 
 class ThreeLayerNeuralNetwork {
