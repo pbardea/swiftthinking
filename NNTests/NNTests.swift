@@ -28,7 +28,7 @@ class LinAlgTests: XCTestCase {
 
 class NNTests: XCTestCase {
     
-    func testThreeInput() {
+    func testGeneralNetwork() {
         let inputSize = 3;
         
         let layer1width = 5;
