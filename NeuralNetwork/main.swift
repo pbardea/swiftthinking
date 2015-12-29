@@ -67,23 +67,27 @@ class NeuralNetwork {
         for _ in 0...numberOfTrainingIterations {
             let layerOutputs = self.think(trainingSetInputs)
             
-            let layer3error: Matrix = matrixSub(trainingSetOutputs, withB: outputFromLayer3)
-            let layer3delta: Matrix = dotMatrix(layer3error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer3))
+            func recur(layerDepth: Int, withAccumulator accumulator: [Matrix]) -> [Matrix] {
+                if (layerDepth >= 0) {
+                    let layerNError: Matrix = matrixSub(accumulator.last!, withB: layerOutputs[layerDepth])
+                    let layerNDelta: Matrix = dotMatrix(layerNError, withB: apply(sigmoidDerivative, toMatrix: layerOutputs[layerDepth]))
+                    
+                    return recur(layerDepth-1, withAccumulator: accumulator + [layerNDelta])
+                }
+                return accumulator
+            }
             
-            let layer2error: Matrix = dotMatrix(layer3delta, withB: transpose(self.layer3.synaptic_weights))
-            let layer2delta: Matrix = dotMatrix(layer2error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer2))
+            let layerDeltas = recur(layerOutputs.count-1, withAccumulator: [trainingSetOutputs])
             
-            let layer1error: Matrix = dotMatrix(layer2delta, withB: transpose(self.layer2.synaptic_weights))
-            let layer1delta: Matrix = dotMatrix(layer1error, withB: apply(sigmoidDerivative, toMatrix: outputFromLayer1))
+            let layerAdjustments = (0..<layerDeltas.count).map { i in
+                dotMatrix(transpose(([trainingSetOutputs]+layerOutputs)[i]), withB: layerDeltas[i])
+            }
             
-            let layer1adjustmnets: Matrix = dotMatrix(transpose(trainingSetInputs), withB: layer1delta)
-            let layer2adjustments: Matrix = dotMatrix(transpose(outputFromLayer1), withB: layer2delta)
-            let layer3adjustments: Matrix = dotMatrix(transpose(outputFromLayer2), withB: layer3delta)
-            
-            self.layer1.synaptic_weights = matrixAdd(self.layer1.synaptic_weights, withB: layer1adjustmnets)
-            self.layer2.synaptic_weights = matrixAdd(self.layer2.synaptic_weights, withB: layer2adjustments)
-            self.layer3.synaptic_weights = matrixAdd(self.layer3.synaptic_weights, withB: layer3adjustments)
+            for (index, layer) in self.layers.enumerate() {
+                layer.synaptic_weights = matrixAdd(layer.synaptic_weights, withB: layerAdjustments[index])
+            }
         }
+    }
 }
 
 class ThreeLayerNeuralNetwork {
