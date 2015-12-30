@@ -28,7 +28,7 @@ class LinAlgTests: XCTestCase {
 
 class NNTests: XCTestCase {
     
-    func testThreeLayer() {
+    func testGeneralNetwork() {
         let inputSize = 3;
         
         let layer1width = 5;
@@ -40,17 +40,43 @@ class NNTests: XCTestCase {
         let layer2 = NeuronLayer(numNeurons: layer2width, numInputsPerNeuron: layer1width)
         let layer3 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer2width)
         
-        let neural_network = NeuralNetwork(layer1: layer1, layer2: layer2, layer3: layer3)
+        let neural_network = NeuralNetwork(layers: [layer1, layer2, layer3])
         
         let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 1], [1, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
         let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 1, 1, 0, 0]]))
         
         neural_network.train(training_set_inputs, trainingSetOutputs: training_set_outputs, numberOfTrainingIterations: 6)
-        let (lev1, lev2, output) = neural_network.think([[1,1,0]])
+        
+        let outputs = neural_network.think([[1,1,0]])
         print("Predicted output for input [[1,1,0]]")
+        print(outputs.last)
+    }
+    
+    func testTwoInput() {
+        let inputSize = 2;
+        
+        let layer1width = 5;
+        let layer2width = 6;
+        
+        let outputSize = 1;
+        
+        let layer1 = NeuronLayer(numNeurons: layer1width, numInputsPerNeuron: inputSize)
+        let layer2 = NeuronLayer(numNeurons: layer2width, numInputsPerNeuron: layer1width)
+        let layer3 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer2width)
+        
+        let neural_network = ThreeLayerNeuralNetwork(layer1: layer1, layer2: layer2, layer3: layer3)
+        
+        let training_set_inputs = IntToDoubleMatrix([[0, 0], [0, 1], [1, 0], [1, 1]])
+        let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 0]]))
+        
+        neural_network.train(training_set_inputs, trainingSetOutputs: training_set_outputs, numberOfTrainingIterations: 600)
+        let (lev1, lev2, output) = neural_network.think([[1,1]])
+        print("Predicted output for input [[1,1]]")
         print(lev1)
         print(lev2)
         print(output)
     }
     
 }
+
+
