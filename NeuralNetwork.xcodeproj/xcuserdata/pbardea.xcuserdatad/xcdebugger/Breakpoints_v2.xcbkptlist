@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NNTests/NNTests.swift"
-            timestampString = "473122219.86243"
+            timestampString = "473130728.621977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "testGeneralNetwork()"
             landmarkType = "5">
          </BreakpointContent>
