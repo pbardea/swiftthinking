@@ -52,9 +52,13 @@ class NeuralNetwork {
         
         // accumulator looks like [inputs, outputFromLayer1
         func recur(outputFromPreviousLayer: Matrix, withAccumulator accumulator: [Matrix], andSynapticDepth synapticDepth: Int) -> [Matrix] {
-            if let lastOut = accumulator.last, synapticLayer = synapticWeightAtIndex(synapticDepth) {
-                let output = apply(sigmoid, toMatrix: dotMatrix(lastOut, withB: synapticLayer))
-                return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
+            if let lastOut = accumulator.last {
+                if let synapticLayer = synapticWeightAtIndex(synapticDepth) {
+                    let output = apply(sigmoid, toMatrix: dotMatrix(lastOut, withB: synapticLayer))
+                    return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
+                } else {
+                    return []
+                }
             } else {
                 return []
             }
