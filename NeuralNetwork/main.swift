@@ -48,17 +48,18 @@ class NeuralNetwork {
     }
     
     func think(inputs: Matrix) -> [Matrix] {
+        // Array of the synaptic weights
         let synapticWeights = self.layers.map { $0.synaptic_weights }
         
-        // accumulator looks like [inputs, outputFromLayer1
         func recur(outputFromPreviousLayer: Matrix, withAccumulator accumulator: [Matrix], andSynapticDepth synapticDepth: Int) -> [Matrix] {
-            if let lastOut = accumulator.last {
-                if let synapticLayer = synapticWeightAtIndex(synapticDepth) {
-                    let output = apply(sigmoid, toMatrix: dotMatrix(lastOut, withB: synapticLayer))
-                    return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
-                } else {
-                    return []
-                }
+            if let lastOut = accumulator.last, synapticLayer = synapticWeightAtIndex(synapticDepth) {
+                // Apply the weights of each synapsis to the last layer of input
+                let z = dotMatrix(lastOut, withB: synapticLayer)
+                // Apply the sigmoid function (each neuron)
+                let output = apply(sigmoid, toMatrix: z)
+                
+                // Recursively apply to the rest of the layers
+                return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
             } else {
                 return []
             }
@@ -68,7 +69,9 @@ class NeuralNetwork {
         return recur(inputs, withAccumulator: [inputs], andSynapticDepth: 0)
     }
     
+    // Trains using back-propogation
     func train(trainingSetInputs: Matrix, trainingSetOutputs: Matrix, numberOfTrainingIterations: Int) -> Void {
+        // Purpose is to minimize the cost function
         for _ in 0...numberOfTrainingIterations {
             let outputs = self.think(trainingSetInputs)
             

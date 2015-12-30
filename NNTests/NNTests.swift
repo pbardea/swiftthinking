@@ -29,7 +29,10 @@ class LinAlgTests: XCTestCase {
 class NNTests: XCTestCase {
     
     func testGeneralNetwork() {
-        let inputSize = 3;
+        let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 1], [1, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
+        let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 1, 1, 0, 0]]))
+        
+        let inputSize = training_set_inputs[0].count;
         
         let layer1width = 5;
         let layer2width = 6;
@@ -42,8 +45,6 @@ class NNTests: XCTestCase {
         
         let neural_network = NeuralNetwork(layers: [layer1, layer2, layer3])
         
-        let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 1], [1, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
-        let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 1, 1, 0, 0]]))
         
         neural_network.train(training_set_inputs, trainingSetOutputs: training_set_outputs, numberOfTrainingIterations: 6)
         
