@@ -8,6 +8,22 @@
 
 import Foundation
 
+typealias Matrix = [[Double]]
+typealias Vector = [Double]
+
+// Hack around lacking extensions
+protocol DoubleProtocol {}
+extension Double : DoubleProtocol {}
+
+extension Array where Element : DoubleProtocol {
+    func dot(b: Vector) -> Double {
+        var n: Double = 0
+        let lim = min(self.count,b.count);
+        for i in (0..<lim) { n += self[i] * b[i] }
+        return n;
+    }
+}
+
 func transpose(a: Matrix) -> Matrix {
     assert(a.count > 0)
     let width = a[0].count
@@ -15,27 +31,21 @@ func transpose(a: Matrix) -> Matrix {
     return (0..<width).map {i in getColumn(i, ofMatrix: a)}
 }
 
-func getColumn(i: Int, ofMatrix a: Matrix) -> [Double] {
+func getColumn(i: Int, ofMatrix a: Matrix) -> Vector {
     return a.map {$0[i]}
 }
 
-func getRow(i: Int, ofMatrix a: Matrix) -> [Double] {
+func getRow(i: Int, ofMatrix a: Matrix) -> Vector {
     return a[i]
 }
 
-func dotVector(a: [Double], withB b: [Double]) -> Double {
-    var n: Double = 0
-    let lim = min(a.count,b.count);
-    for i in (0..<lim) { n += a[i] * b[i] }
-    return n;
-}
 
 
 func dotMatrix(a: Matrix, withB b: Matrix) -> [[Double]] {
     assert(b.count > 0)
     return (0..<a.count).map { i in
         (0..<b[0].count).map { j in
-            dotVector(getRow(i, ofMatrix: a), withB: getColumn(j, ofMatrix: b))
+            getRow(i, ofMatrix: a).dot(getColumn(j, ofMatrix: b))
         }
     }
 }

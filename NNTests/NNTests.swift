@@ -13,7 +13,7 @@ class LinAlgTests: XCTestCase {
     func testDotVector() {
         let a = [1.0, 2.0, 3.0]
         let b = [3.0, 4.0, 5.0]
-        let result = dotVector(a, withB: b)
+        let result = a.dot(b)
         XCTAssertTrue(result == 26)
     }
     

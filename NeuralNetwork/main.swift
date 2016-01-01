@@ -9,7 +9,6 @@
 
 import Foundation
 
-typealias Matrix = [[Double]]
 
 func getRandomNumMatrixWithHeight(height: Int, byWidth width: Int) -> Matrix {
     return (0..<height).map { _ in
