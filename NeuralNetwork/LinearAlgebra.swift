@@ -12,7 +12,15 @@ typealias Matrix = [[Double]]
 typealias Vector = [Double]
 
 // Hack around lacking extensions
-protocol DoubleProtocol {}
+protocol DoubleProtocol {
+    func *(lhs: Self, rhs: Double) -> Double // really weird line because of protocol hack...
+    // Add three more operations just in case
+    func +(lhs: Self, rhs: Double) -> Double
+    func /(lhs: Self, rhs: Double) -> Double
+    func -(lhs: Self, rhs: Double) -> Double
+    init()
+}
+
 extension Double : DoubleProtocol {}
 
 extension Array where Element : DoubleProtocol {
