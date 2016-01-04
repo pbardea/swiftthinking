@@ -28,7 +28,10 @@ class LinAlgTests: XCTestCase {
 
 class NNTests: XCTestCase {
     
-    func testGeneralNetwork() {
+    
+    // These 2 tests experiment the effects of overfitting
+    
+    func testGeneralNetwork1() { // This test overfits the data and does not perform very well.
         let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 1], [1, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
         let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 1, 1, 0, 0]]))
         
@@ -50,7 +53,32 @@ class NNTests: XCTestCase {
         
         let outputs = neural_network.think([[1,1,0]])
         print("Predicted output for input [[1,1,0]]")
-        print(outputs.last)
+        print(outputs.last) // Outputs about 0.574
+    }
+    
+    func testGeneralNetwork2() { // This test performs better than test 1
+        let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
+        let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 0, 0]]))
+        
+        let inputSize = training_set_inputs[0].count;
+        
+        let layer1width = 5;
+        let layer2width = 6;
+        
+        let outputSize = 1;
+        
+        let layer1 = NeuronLayer(numNeurons: layer1width, numInputsPerNeuron: inputSize)
+        let layer2 = NeuronLayer(numNeurons: layer2width, numInputsPerNeuron: layer1width)
+        let layer3 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer2width)
+        
+        let neural_network = NeuralNetwork(layers: [layer1, layer2, layer3])
+        
+        
+        neural_network.train(training_set_inputs, trainingSetOutputs: training_set_outputs, numberOfTrainingIterations: 6)
+        
+        let outputs = neural_network.think([[1,1,0]])
+        print("Predicted output for input [[1,1,0]]")
+        print(outputs.last) // outputs around 0.36 - 0.4 (closer to 0)
     }
     
     func testTwoInput() {
