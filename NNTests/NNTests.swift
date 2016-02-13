@@ -56,7 +56,7 @@ class NNTests: XCTestCase {
         print(outputs.last) // Outputs about 0.574
     }
     
-    func testGeneralNetwork2() { // This test performs better than test 1
+    func testGeneralNetwork2() { // This test performs better than test 1 (has less data, so doesn't over-fit)
         let training_set_inputs = IntToDoubleMatrix([[0, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1], [1, 1, 0]])
         let training_set_outputs = transpose(IntToDoubleMatrix([[0, 1, 1, 0, 0]]))
         
