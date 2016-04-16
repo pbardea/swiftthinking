@@ -11,29 +11,13 @@ import Foundation
 typealias Matrix = [[Double]]
 typealias Vector = [Double]
 
-// Hack around lacking extensions
-protocol DoubleProtocol {
-    func * (lhs: Self, rhs: Double) -> Double // really weird line because of protocol hack...
-    // Add three more operations just in case
-    func + (lhs: Self, rhs: Double) -> Double
-    func / (lhs: Self, rhs: Double) -> Double
-    func - (lhs: Self, rhs: Double) -> Double
-    init()
-}
-
-extension Double: DoubleProtocol {}
-
-extension Array where Element : DoubleProtocol {
-
-    func dot(b: Vector) -> Double {
-        var n: Double = 0
-        let lim = min(self.count, b.count)
-        for i in (0..<lim) {
-            n += self[i] * b[i]
-        }
-        return n
+func dot(a: Vector, withB b: Vector) -> Double {
+    var n: Double = 0
+    let lim = min(a.count, b.count)
+    for i in (0..<lim) {
+        n += a[i] * b[i]
     }
-
+    return n
 }
 
 func transpose(a: Matrix) -> Matrix {
@@ -57,7 +41,7 @@ func dotMatrix(a: Matrix, withB b: Matrix) -> [[Double]] {
     assert(b.count > 0)
     return (0..<a.count).map { i in
         (0..<b[0].count).map { j in
-            getRow(i, ofMatrix: a).dot(getColumn(j, ofMatrix: b))
+            dot(getRow(i, ofMatrix: a), withB: getColumn(j, ofMatrix: b))
         }
     }
 }
