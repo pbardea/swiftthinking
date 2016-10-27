@@ -9,6 +9,16 @@
 import Foundation
 @testable import NeuralNetwork
 
+extension Int {
+    
+    func bits(numOfDigits: Int) -> [Int] {
+        let binaryString = String(self, radix: 2)
+        let numberOfZeros = numOfDigits - binaryString.characters.count
+        let zeros: [Int] = [Int](repeating: 0, count: numberOfZeros)
+        return zeros + binaryString.characters.map { Int(String($0)) ?? 0 }
+    }
+    
+}
 
 func getRandomNumMatrixWithHeight(_ height: Int, byWidth width: Int) -> Matrix<Double> {
     let data = (0..<height).map { _ in
@@ -73,7 +83,8 @@ class NeuralNetwork {
     // Trains using back-propogation
     func train(_ trainingSetInputs: Matrix<Double>, trainingSetOutputs: Matrix<Double>, numberOfTrainingIterations: Int) -> Void {
         // Purpose is to minimize the cost function
-        for _ in 0...numberOfTrainingIterations {
+        for iteration in 0...numberOfTrainingIterations {
+            print(iteration)
             let outputs = self.think(trainingSetInputs)
 
             func recur(_ layerDepth: Int, withAccumulator accumulator: [Matrix<Double>]) -> [Matrix<Double>] {
@@ -220,19 +231,23 @@ func test2() {
      1,1,0,0 => 0
      1,0,1,1 => 1
      */
-    let inputs = [
-        [1,1,1,0,1,0,1],
-        [0,1,1,1,0,0,1],
-        [1,0,1,0,1,0,1],
-        [0,0,0,0,1,1,1],
-        [1,1,1,1,1,1,1],
-        [0,1,0,1,0,1,0],
-        [0,1,0,1,1,1,1],
-        [0,0,0,1,1,1,1],
-        [0,0,0,1,0,1,0],
-        [1,0,0,1,0,1,0]
-    ]
-//    let inputs = (0..<256).map { Array(String($0, radix: 2).characters) }.map { Int($0)! }
+//    let inputs = [
+//        [1,1,1,0,1,0,1],
+//        [0,1,1,1,0,0,1],
+//        [1,0,1,0,1,0,1],
+//        [0,0,0,0,1,1,1],
+//        [1,1,1,1,1,1,1],
+//        [0,1,0,1,0,1,0],
+//        [0,1,0,1,1,1,1],
+//        [0,0,0,1,1,1,1],
+//        [0,0,0,1,0,1,0],
+//        [1,0,0,1,0,1,0]
+//    ]
+    let inputs: [[Int]] = (0..<256).map { num in
+        let maxDigits = 8
+        return num.bits(numOfDigits: maxDigits)
+    }
+    
     let trainingSetInputs = intToDoubleMatrix(input: inputs)
     let trainingSetOutputs = intToDoubleMatrix(input: inputs.map { [$0[0] ^ $0[1]] } ).transpose
     
@@ -256,10 +271,11 @@ func test2() {
     
     let neuralNetwork = NeuralNetwork(layers: [layer1, layer2, layer3, layer4, layer5, layer6])
     
+    print("Start training")
+    neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 20)
+    print("End training")
     
-    neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 6)
-    
-    let input = [1,0,0,1,1,1,0]
+    let input = [1,0,0,1,1,1,0,0]
     let outputs = neuralNetwork.think(intToDoubleMatrix(input: [input]))
     print("Predicted output for input [\(input)]")
     let ans = outputs.last?.getRow(row: 0)[0]
@@ -267,3 +283,4 @@ func test2() {
 }
 
 test2()
+
