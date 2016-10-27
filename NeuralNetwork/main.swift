@@ -220,33 +220,50 @@ func test2() {
      1,1,0,0 => 0
      1,0,1,1 => 1
      */
-    
-    let trainingSetInputs = intToDoubleMatrix(input: [[0, 0, 1,0], [0, 1, 0,1], [1, 0, 0,0], [1, 1, 1,1], [1, 1, 0,0], [1,0,1,1]])
-    let trainingSetOutputs = intToDoubleMatrix(input: [[0, 1, 1, 0, 0,1]]).transpose
+    let inputs = [
+        [1,1,1,0,1,0,1],
+        [0,1,1,1,0,0,1],
+        [1,0,1,0,1,0,1],
+        [0,0,0,0,1,1,1],
+        [1,1,1,1,1,1,1],
+        [0,1,0,1,0,1,0],
+        [0,1,0,1,1,1,1],
+        [0,0,0,1,1,1,1],
+        [0,0,0,1,0,1,0],
+        [1,0,0,1,0,1,0]
+    ]
+//    let inputs = (0..<256).map { Array(String($0, radix: 2).characters) }.map { Int($0)! }
+    let trainingSetInputs = intToDoubleMatrix(input: inputs)
+    let trainingSetOutputs = intToDoubleMatrix(input: inputs.map { [$0[0] ^ $0[1]] } ).transpose
     
     let inputSize = trainingSetInputs[0].count
     
-    let layer1width = 6
-    let layer2width = 7
+    let layer1width = 10
+    let layer2width = 17
+    let layer3width = 40
+    let layer4width = 50
+    let layer5width = 30
+
     
     let outputSize = 1
     
     let layer1 = NeuronLayer(numNeurons: layer1width, numInputsPerNeuron: inputSize)
     let layer2 = NeuronLayer(numNeurons: layer2width, numInputsPerNeuron: layer1width)
-    let layer3 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer2width)
+    let layer3 = NeuronLayer(numNeurons: layer3width, numInputsPerNeuron: layer2width)
+    let layer4 = NeuronLayer(numNeurons: layer4width, numInputsPerNeuron: layer3width)
+    let layer5 = NeuronLayer(numNeurons: layer5width, numInputsPerNeuron: layer4width)
+    let layer6 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer5width)
     
-    let neuralNetwork = NeuralNetwork(layers: [layer1, layer2, layer3])
+    let neuralNetwork = NeuralNetwork(layers: [layer1, layer2, layer3, layer4, layer5, layer6])
     
     
     neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 6)
     
-    let input = [1,1,0,1]
+    let input = [1,0,0,1,1,1,0]
     let outputs = neuralNetwork.think(intToDoubleMatrix(input: [input]))
     print("Predicted output for input [\(input)]")
     let ans = outputs.last?.getRow(row: 0)[0]
     print(ans)
-    print(Int(ans!)) // outputs around 0.36 - 0.4 (closer to 0)
 }
 
-test1()
 test2()
