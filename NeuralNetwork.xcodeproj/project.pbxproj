@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F4BD1F81DC419D200740F31 /* ThreeLayerNeuralNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1F71DC419D200740F31 /* ThreeLayerNeuralNet.swift */; };
+		9F4BD1FA1DC41A0A00740F31 /* NeuronLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1F91DC41A0A00740F31 /* NeuronLayer.swift */; };
+		9F4BD1FC1DC41A1F00740F31 /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1FB1DC41A1F00740F31 /* NeuralNetwork.swift */; };
+		9F4BD1FE1DC41A3B00740F31 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1FD1DC41A3B00740F31 /* Helpers.swift */; };
 		9F5E09101DB409A40078BC61 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E090D1DB409A40078BC61 /* Matrix.swift */; };
 		9F5E09111DB409A40078BC61 /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E090E1DB409A40078BC61 /* Numeric.swift */; };
 		9F5E09121DB409A40078BC61 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E090F1DB409A40078BC61 /* Vector.swift */; };
@@ -27,6 +31,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9F4BD1F71DC419D200740F31 /* ThreeLayerNeuralNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeLayerNeuralNet.swift; sourceTree = "<group>"; };
+		9F4BD1F91DC41A0A00740F31 /* NeuronLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuronLayer.swift; sourceTree = "<group>"; };
+		9F4BD1FB1DC41A1F00740F31 /* NeuralNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuralNetwork.swift; sourceTree = "<group>"; };
+		9F4BD1FD1DC41A3B00740F31 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		9F5E090D1DB409A40078BC61 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		9F5E090E1DB409A40078BC61 /* Numeric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		9F5E090F1DB409A40078BC61 /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 			isa = PBXGroup;
 			children = (
 				9FAC51D41C2E56DE00A2DF83 /* main.swift */,
+				9F4BD1FB1DC41A1F00740F31 /* NeuralNetwork.swift */,
+				9F4BD1FD1DC41A3B00740F31 /* Helpers.swift */,
+				9F4BD1F91DC41A0A00740F31 /* NeuronLayer.swift */,
+				9F4BD1F71DC419D200740F31 /* ThreeLayerNeuralNet.swift */,
 				9F5E090D1DB409A40078BC61 /* Matrix.swift */,
 				9F5E090E1DB409A40078BC61 /* Numeric.swift */,
 				9F5E090F1DB409A40078BC61 /* Vector.swift */,
@@ -137,7 +149,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "pbardea stdios";
 				TargetAttributes = {
 					9FAC51C71C2E564600A2DF83 = {
@@ -183,10 +195,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F4BD1F81DC419D200740F31 /* ThreeLayerNeuralNet.swift in Sources */,
 				9F5E09101DB409A40078BC61 /* Matrix.swift in Sources */,
 				9F5E09111DB409A40078BC61 /* Numeric.swift in Sources */,
+				9F4BD1FE1DC41A3B00740F31 /* Helpers.swift in Sources */,
 				9F5E09121DB409A40078BC61 /* Vector.swift in Sources */,
+				9F4BD1FA1DC41A0A00740F31 /* NeuronLayer.swift in Sources */,
 				9FAC51D51C2E56DE00A2DF83 /* main.swift in Sources */,
+				9F4BD1FC1DC41A1F00740F31 /* NeuralNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,13 +230,16 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -240,6 +259,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = NeuralNetwork;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -258,15 +278,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -277,7 +301,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = NeuralNetwork;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -286,6 +312,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -298,6 +325,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
