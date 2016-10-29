@@ -29,16 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9FAC51D91C2E57A200A2DF83"
-               BuildableName = "NeuralNetworkTests.xctest"
-               BlueprintName = "NeuralNetworkTests"
-               ReferencedContainer = "container:NeuralNetwork.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
