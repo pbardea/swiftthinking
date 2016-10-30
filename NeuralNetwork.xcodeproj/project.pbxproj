@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F4BD1F81DC419D200740F31 /* ThreeLayerNeuralNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1F71DC419D200740F31 /* ThreeLayerNeuralNet.swift */; };
 		9F4BD1FA1DC41A0A00740F31 /* NeuronLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1F91DC41A0A00740F31 /* NeuronLayer.swift */; };
 		9F4BD1FC1DC41A1F00740F31 /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1FB1DC41A1F00740F31 /* NeuralNetwork.swift */; };
 		9F4BD1FE1DC41A3B00740F31 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4BD1FD1DC41A3B00740F31 /* Helpers.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9F4BD1F71DC419D200740F31 /* ThreeLayerNeuralNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeLayerNeuralNet.swift; sourceTree = "<group>"; };
 		9F4BD1F91DC41A0A00740F31 /* NeuronLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuronLayer.swift; sourceTree = "<group>"; };
 		9F4BD1FB1DC41A1F00740F31 /* NeuralNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuralNetwork.swift; sourceTree = "<group>"; };
 		9F4BD1FD1DC41A3B00740F31 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 				9F4BD1FB1DC41A1F00740F31 /* NeuralNetwork.swift */,
 				9F4BD1FD1DC41A3B00740F31 /* Helpers.swift */,
 				9F4BD1F91DC41A0A00740F31 /* NeuronLayer.swift */,
-				9F4BD1F71DC419D200740F31 /* ThreeLayerNeuralNet.swift */,
 				9F5E090D1DB409A40078BC61 /* Matrix.swift */,
 				9F5E090E1DB409A40078BC61 /* Numeric.swift */,
 				9F5E090F1DB409A40078BC61 /* Vector.swift */,
@@ -182,7 +179,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F4BD1F81DC419D200740F31 /* ThreeLayerNeuralNet.swift in Sources */,
 				9F5E09101DB409A40078BC61 /* Matrix.swift in Sources */,
 				9F5E09111DB409A40078BC61 /* Numeric.swift in Sources */,
 				9F4BD1FE1DC41A3B00740F31 /* Helpers.swift in Sources */,

@@ -28,13 +28,15 @@ func test1() {
     let inputSize = 3
     
     let layer1width = 5
+    let layer2width = 8
     
     let outputSize = 1
     
     let layer1 = NeuronLayer(numNeurons: layer1width, numInputsPerNeuron: inputSize)
-    let layer2 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer1width)
+    let layer2 = NeuronLayer(numNeurons: layer2width, numInputsPerNeuron: layer1width)
+    let layer3 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer2width)
     
-    let neuralNetwork = NeuralNetwork(layers: [layer1, layer2])
+    let neuralNetwork = NeuralNetwork(layers: [layer1, layer2, layer3])
     
     neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 4000)
     
