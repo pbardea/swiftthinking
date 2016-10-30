@@ -21,7 +21,7 @@ func test1() {
         [0, 0, 1],
         [0, 1, 1],
         [1, 0, 1],
-        [1, 1, 0]
+        [1, 1, 1]
     ].map { Vector($0.map{Double($0)}) })
     let trainingSetOutputs = intToDoubleMatrix(input: [[0, 1, 1, 0]]).transpose
     
@@ -36,13 +36,11 @@ func test1() {
     
     let neuralNetwork = NeuralNetwork(layers: [layer1, layer2])
     
-    neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 5000)
+    neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 4000)
     
-    let userInput = [0,0,1]
+    let outputs = neuralNetwork.think(intToDoubleMatrix(input: [[1, 1, 0]]))
     
-    let outputs = neuralNetwork.think(intToDoubleMatrix(input: [userInput]))
-    
-    print("Predicted output for input \(userInput)")
+    print("Predicted output for input [[1, 1, 1]]")
     print(outputs.last) // Outputs about 0.574
 }
 

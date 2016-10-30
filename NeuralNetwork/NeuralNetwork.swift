@@ -74,7 +74,6 @@ class NeuralNetwork {
 
         // Purpose is to minimize the cost function
         (0...numberOfTrainingIterations).forEach { iteration in
-            print(Double(iteration)/Double(numberOfTrainingIterations))
             let outputs = self.think(trainingSetInputs)
         
             // Backpropogate from the last layer
@@ -86,7 +85,9 @@ class NeuralNetwork {
             self.layers.enumerated().forEach { (index, layer) in 
                 layer.synapticWeights = layer.synapticWeights + layerAdjustments[index]
             }
-            print(self.layers[0].synapticWeights)
+            if iteration == numberOfTrainingIterations {
+                print(self.layers)
+            }
         }
     }
 }
