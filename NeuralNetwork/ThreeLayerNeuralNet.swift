@@ -58,7 +58,7 @@ class ThreeLayerNeuralNetwork {
         }
     }
 
-    func printuWeight() -> Void {
+    func printWeight() -> Void {
         print("\tLayer 1")
         print(layer1.synapticWeights)
         print("\tLayer 2")

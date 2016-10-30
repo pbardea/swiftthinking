@@ -24,7 +24,7 @@ class NeuralNetwork {
     }
 
     func synapticWeightAtIndex(_ index: Int) -> Matrix<Double>? {
-        let synapticWeights = self.layers.map { $0.synapticWeights } // TODO: DRY up this code
+        let synapticWeights = self.layers.map { $0.synapticWeights }
 
         return synapticWeights.indices ~= index ? synapticWeights[index] : nil
     }
@@ -33,55 +33,60 @@ class NeuralNetwork {
         // Array of the synaptic weights
         let synapticWeights = self.layers.map { $0.synapticWeights }
 
-        func recur(_ outputFromPreviousLayer: Matrix<Double>, withAccumulator accumulator: [Matrix<Double>], andSynapticDepth synapticDepth: Int) -> [Matrix<Double>] {
-            if let lastOut = accumulator.last, let synapticLayer = synapticWeightAtIndex(synapticDepth) {
-                // Apply the weights of each synapsis to the last layer of input
-                let z = lastOut * synapticLayer //dotMatrix(lastOut, withB: synapticLayer)
-                // Apply the sigmoid function (each neuron)
-                let output = z.apply(function: sigmoid) //apply(sigmoid, toMatrix: z)
+        func propogate(_ outputFromPreviousLayer: Matrix<Double>, withLayers layers: [Matrix<Double>], atSynapticDepth synapticDepth: Int = 0) -> [Matrix<Double>] {
+            guard let lastOut = layers.last, let synapticLayer = synapticWeightAtIndex(synapticDepth) else { return [] }
+            
+            // Apply the weights of each synapsis to the last layer of input
+            let layer = lastOut * synapticLayer
+            // Apply the sigmoid function (each neuron)
+            let nextLayer = layer.apply(function: sigmoid)
 
-                // Recursively apply to the rest of the layers
-                return [output] + recur(output, withAccumulator: accumulator + [output], andSynapticDepth: synapticDepth + 1)
-            } else {
-                return []
-            }
+            // Recursively apply to the rest of the layers
+            return [nextLayer] + propogate(nextLayer, withLayers: layers + [nextLayer], atSynapticDepth: synapticDepth + 1)
         }
 
 
-        return recur(inputs, withAccumulator: [inputs], andSynapticDepth: 0)
+        return propogate(inputs, withLayers: [inputs])
     }
 
     // Trains using back-propogation
-    func train(_ trainingSetInputs: Matrix<Double>, trainingSetOutputs: Matrix<Double>, numberOfTrainingIterations: Int) -> Void {
-        // Purpose is to minimize the cost function
-        for iteration in 0...numberOfTrainingIterations {
-            print(iteration)
-            let outputs = self.think(trainingSetInputs)
-
-            func recur(_ layerDepth: Int, withAccumulator accumulator: [Matrix<Double>]) -> [Matrix<Double>] {
-                if layerDepth >= 0 { // starts at self.layers.count - 1
-                    var layerNError: Matrix<Double>
-                    if layerDepth == self.layers.count - 1 {
-                        layerNError = ([trainingSetOutputs] + accumulator).last! - outputs[layerDepth]
-                    } else {
-                        layerNError = ([trainingSetOutputs] + accumulator).last! * self.layers[layerDepth + 1].synapticWeights.transpose
-                    }
-                    let layerNDelta: Matrix = layerNError * outputs[layerDepth].apply(function: sigmoidDerivative)
-
-                    return recur(layerDepth-1, withAccumulator: accumulator + [layerNDelta])
-                }
-                return accumulator
+    func train(_ trainingSetInputs: Matrix<Double>, trainingSetOutputs: Matrix<Double>, numberOfTrainingIterations: Int, verbose: Bool = false) -> Void {
+        /**
+         With default arugments:
+            Returns the layer deltas for all layers
+         
+         With specified arguments:
+            Returns the layer deltas including and after the specified `layerDepth`
+        */
+        func backpropogate(_ layerDepth: Int, withLayerDeltas deltaLayers: [Matrix<Double>] = [], andGuessedOutput outputs: [Matrix<Double>]) -> [Matrix<Double>] {
+            guard layerDepth >= 0 else { return deltaLayers }
+            
+            var layerError: Matrix<Double>
+            if let lastDelta = deltaLayers.last {
+                layerError = lastDelta * self.layers[layerDepth + 1].synapticWeights.transpose
+            } else {
+                layerError = trainingSetOutputs - outputs[layerDepth]
             }
+            let layerDelta: Matrix = layerError * outputs[layerDepth].apply(function: sigmoidDerivative)
 
-            let layerDeltas = recur(self.layers.count - 1, withAccumulator: [])
+            return backpropogate(layerDepth-1, withLayerDeltas: deltaLayers + [layerDelta], andGuessedOutput: outputs)
+        }
+
+        // Purpose is to minimize the cost function
+        (0...numberOfTrainingIterations).forEach { iteration in
+            print(Double(iteration)/Double(numberOfTrainingIterations))
+            let outputs = self.think(trainingSetInputs)
+        
+            // Backpropogate from the last layer
+            let layerDeltas = backpropogate(self.layers.count - 1, andGuessedOutput: outputs)
 
             let layerAdjustments = (0..<layerDeltas.count).map { i in
                 ([trainingSetInputs]+outputs)[i].transpose * layerDeltas[self.layers.count - 1 - i]
             }
-            for (index, layer) in self.layers.enumerated() {
+            self.layers.enumerated().forEach { (index, layer) in 
                 layer.synapticWeights = layer.synapticWeights + layerAdjustments[index]
             }
+            print(self.layers[0].synapticWeights)
         }
     }
-
 }
