@@ -38,9 +38,11 @@ func test1() {
     
     neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations: 4000)
     
-    let outputs = neuralNetwork.think(intToDoubleMatrix(input: [[1, 1, 0]]))
+    let userInput = [1,1,0]
     
-    print("Predicted output for input [[1, 1, 1]]")
+    let outputs = neuralNetwork.think(intToDoubleMatrix(input: [userInput]))
+    
+    print("Predicted output for input \(userInput)")
     print(outputs.last) // Outputs about 0.574
 }
 
