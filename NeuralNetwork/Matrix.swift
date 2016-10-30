@@ -34,7 +34,7 @@ extension Matrix: CustomStringConvertible {
     
     var description: String {
         return self.data.reduce("") {
-            "\($0)\n\($1)"
+            "\($0)\($1)"
         }
     }
 }
