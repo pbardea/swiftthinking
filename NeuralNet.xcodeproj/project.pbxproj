@@ -427,6 +427,7 @@
 				9FAD1A181DC668450087FA1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9FAD1A191DC668450087FA1D /* Build configuration list for PBXNativeTarget "NeuralNetTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +436,7 @@
 				9FAD1A1B1DC668450087FA1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -20,26 +20,16 @@ struct Matrix<T: Numeric> {
         assert(index < self.data.count && index >= 0)
         return data[index]
     }
-
-    init(_ data: [Vector<Element>] = []) {
-        self.data = data
-    }
-
-    init(_ data: [[Element]] = []) {
-        self.data = data.map { d in Vector(d) }
-    }
-}
-
-extension Matrix: CustomStringConvertible {
-    
-    var description: String {
-        return self.data.reduce("") {
-            "\($0)\($1)"
-        }
-    }
 }
 
 extension Matrix {
+    init(_ data: [Vector<Element>] = []) {
+        self.data = data
+    }
+    
+    init(_ data: [[Element]] = []) {
+        self.data = data.map { d in Vector(d) }
+    }
     
     static func doubleMatrixFrom(input: [[Int]]) -> Matrix<Element> {
         let vectors = input.map {
@@ -47,7 +37,16 @@ extension Matrix {
         }
         return Matrix(vectors)
     }
-
+    
+    static func getRandomNumMatrixWithHeight(_ height: Int, byWidth width: Int) -> Matrix<Element> {
+        let data = (0..<height).map { _ in
+            (0..<width).map { _ in
+                Element(2 * drand48() - 1)
+            }
+        }
+        let vectors = data.map(Vector.init)
+        return Matrix(vectors)
+    }
 }
 
 extension Matrix: Sequence {
@@ -74,9 +73,7 @@ extension Matrix {
     }
 
     func getColumn(column: Int) -> Vector<Element> {
-        return Vector(self.data.map { v in
-            v[column]
-        })
+        return Vector(self.data.map { $0[column] })
     }
 
 }
@@ -153,18 +150,7 @@ extension Matrix {
     }
 }
 
-extension Matrix {
-    static func getRandomNumMatrixWithHeight(_ height: Int, byWidth width: Int) -> Matrix<Element> {
-        let data = (0..<height).map { _ in
-            (0..<width).map { _ in
-                Element(2 * drand48() - 1)
-            }
-        }
-        let vectors = data.map(Vector.init)
-        return Matrix(vectors)
-    }
-}
-
+// Operators
 func + <T: Numeric>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
     return lhs.add(m: rhs)
 }
@@ -175,4 +161,13 @@ func - <T: Numeric>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
 
 func * <T: Numeric>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
     return lhs.mult(m: rhs)
+}
+
+// Debugging
+extension Matrix: CustomStringConvertible {
+    var description: String {
+        return self.data.reduce("") {
+            "\($0)\($1)"
+        }
+    }
 }
