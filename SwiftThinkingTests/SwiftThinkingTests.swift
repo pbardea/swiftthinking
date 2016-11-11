@@ -11,26 +11,43 @@ import XCTest
 
 class SwiftThinkingTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func getTrainedNet() -> NeuralNetwork {
+        
+        let trainingSetInputs = Matrix([
+            [0, 0, 1],
+            [0, 1, 1],
+            [1, 0, 1],
+            [1, 1, 1]
+            ].map { Vector($0.map{Double($0)}) })
+        let trainingSetOutputs = Matrix<Double>.doubleMatrixFrom(input: [[0, 1, 1, 0]]).transpose
+        
+        let inputSize = 3
+        
+        let layer1width = 5
+        
+        let outputSize = 1
+        
+        let layer1 = NeuronLayer(numNeurons: layer1width, numInputsPerNeuron: inputSize)
+        let layer2 = NeuronLayer(numNeurons: outputSize, numInputsPerNeuron: layer1width)
+        
+        let neuralNetwork = NeuralNetwork(layers: [layer1, layer2])
+        
+        neuralNetwork.train(trainingSetInputs, trainingSetOutputs: trainingSetOutputs, numberOfTrainingIterations:4000)
+        
+        return neuralNetwork
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test1() {
+        
+        let userInput = [1,1,0]
+        
+        let neuralNetwork = getTrainedNet()
+        
+        let outputs = neuralNetwork.think(Matrix.doubleMatrixFrom(input: [userInput]))
+        
+        guard let output = outputs.last else { return }
+        print("Predicted output for input \(userInput) is \(output[0][0])")
+        print(output[0][0])
     }
     
 }
