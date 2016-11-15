@@ -11,6 +11,8 @@ import Foundation
 
 protocol NeuronLayer {
     var synapticWeights: Matrix<Double> { get set }
+    
+    func propogate(previousOutputs: Matrix<Double>) -> [Matrix<Double>]
 }
 
 class FullNeuronLayer: NeuronLayer {
@@ -20,6 +22,8 @@ class FullNeuronLayer: NeuronLayer {
     }
     
     let activationFunction: ActivationFunction = .sigmoid
+    var nextLayer: NeuronLayer? = nil
+    var previousLayer: NeuronLayer? = nil
     
     enum ActivationFunction {
         case sigmoid
@@ -59,6 +63,35 @@ class FullNeuronLayer: NeuronLayer {
             }
         }
     }
+    
+    func propogate(previousOutputs: Matrix<Double>) -> [Matrix<Double>] {
+        let newLayer = (previousOutputs * synapticWeights).apply(function: activationFunction.function)
+        
+        return [newLayer] + (nextLayer?.propogate(previousOutputs: newLayer) ?? [])
+    }
+    
+    func think(_ inputs: Matrix<Double>) -> [Matrix<Double>] {
+        return propogate(previousOutputs: inputs)
+    }
+    
+//    func train() {
+//        let trainingSetOutputs = Matrix<Double>()
+//        let outputs = [Matrix<Double>]()
+//        
+//        func backpropogate(withLayerDeltas layerDeltas: [Matrix<Double>] = []) -> [Matrix<Double>] {
+//            guard let previousLayer = previousLayer else { return layerDeltas }
+//            
+//            var layerError: Matrix<Double>
+//            if let lastDelta = layerDeltas.last {
+//                layerError = lastDelta * self.layers[layerDepth + 1].synapticWeights.transpose
+//            } else { // Special case for when generating the first delta (for the last layer)
+//                layerError = trainingSetOutputs - outputs[layerDepth]
+//            }
+//            let layerDelta: Matrix = layerError * outputs[layerDepth].apply(function: activationFunction.derivative)
+//
+//            return previousLayer.backpropogate(withLayerDeltas: layerDeltas + [layerDelta])
+//        }
+//    }
     
 }
 

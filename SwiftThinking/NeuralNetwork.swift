@@ -32,7 +32,7 @@ class NeuralNetwork {
             }
             
             // Apply the weights of each synapsis to the last layer of input
-            let nextLayer = (lastOut * synapticLayer).apply(function: activationFunction.function)
+            let nextLayer = (lastOut * synapticLayer).apply(function: seactivationFunction.function)
 
             // Recursively apply to the rest of the layers
             return [nextLayer] + propogate(nextLayer, withLayers: layers + [nextLayer], atSynapticDepth: synapticDepth + 1)
