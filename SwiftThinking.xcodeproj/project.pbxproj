@@ -17,6 +17,8 @@
 		9F89E0AD1DD4CBE500A22A6A /* NeuronLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F89E0A61DD4CBE500A22A6A /* NeuronLayer.swift */; };
 		9F89E0AE1DD4CBE500A22A6A /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F89E0A71DD4CBE500A22A6A /* Numeric.swift */; };
 		9F89E0AF1DD4CBE500A22A6A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F89E0A81DD4CBE500A22A6A /* Vector.swift */; };
+		9FA9B6CF1DF1DAF900FC9CC9 /* ActivationFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA9B6CE1DF1DAF900FC9CC9 /* ActivationFunction.swift */; };
+		9FA9B6D11DF1DB0C00FC9CC9 /* FullNeuronLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA9B6D01DF1DB0C00FC9CC9 /* FullNeuronLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		9F89E0A61DD4CBE500A22A6A /* NeuronLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuronLayer.swift; sourceTree = "<group>"; };
 		9F89E0A71DD4CBE500A22A6A /* Numeric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		9F89E0A81DD4CBE500A22A6A /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		9FA9B6CE1DF1DAF900FC9CC9 /* ActivationFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationFunction.swift; sourceTree = "<group>"; };
+		9FA9B6D01DF1DB0C00FC9CC9 /* FullNeuronLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullNeuronLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 			children = (
 				9F89E0A51DD4CBE500A22A6A /* NeuralNetwork.swift */,
 				9F89E0A61DD4CBE500A22A6A /* NeuronLayer.swift */,
+				9FA9B6D01DF1DB0C00FC9CC9 /* FullNeuronLayer.swift */,
+				9FA9B6CE1DF1DAF900FC9CC9 /* ActivationFunction.swift */,
 				9F89E0B21DD5833200A22A6A /* Imaging */,
 				9F89E0B01DD5803E00A22A6A /* Linear Algebra */,
 				9F89E0B11DD5805600A22A6A /* Extra */,
@@ -245,8 +251,10 @@
 				9F89E0AA1DD4CBE500A22A6A /* Imaging.swift in Sources */,
 				9F89E0AE1DD4CBE500A22A6A /* Numeric.swift in Sources */,
 				9F89E0A91DD4CBE500A22A6A /* Helpers.swift in Sources */,
+				9FA9B6CF1DF1DAF900FC9CC9 /* ActivationFunction.swift in Sources */,
 				9F89E0AF1DD4CBE500A22A6A /* Vector.swift in Sources */,
 				9F89E0AD1DD4CBE500A22A6A /* NeuronLayer.swift in Sources */,
+				9FA9B6D11DF1DB0C00FC9CC9 /* FullNeuronLayer.swift in Sources */,
 				9F89E0AB1DD4CBE500A22A6A /* Matrix.swift in Sources */,
 				9F89E0AC1DD4CBE500A22A6A /* NeuralNetwork.swift in Sources */,
 			);
@@ -452,6 +460,7 @@
 				9F89E09E1DD4CBD600A22A6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F89E09F1DD4CBD600A22A6A /* Build configuration list for PBXNativeTarget "SwiftThinkingTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +469,7 @@
 				9F89E0A11DD4CBD600A22A6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
