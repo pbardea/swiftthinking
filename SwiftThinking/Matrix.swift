@@ -41,7 +41,7 @@ extension Matrix {
     static func getRandomNumMatrixWithHeight(_ height: Int, byWidth width: Int) -> Matrix<Element> {
         let data = (0..<height).map { _ in
             (0..<width).map { _ in
-                Element(2 * drand48() - 1)
+                Double(2 * drand48() - 1)
             }
         }
         let vectors = data.map(Vector.init)
