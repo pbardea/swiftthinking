@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F27203B1E0366A7003DCF45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F27203A1E0366A7003DCF45 /* Extensions.swift */; };
 		9F89E0921DD4CBD600A22A6A /* SwiftThinking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F89E0881DD4CBD600A22A6A /* SwiftThinking.framework */; };
 		9F89E0971DD4CBD600A22A6A /* SwiftThinkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F89E0961DD4CBD600A22A6A /* SwiftThinkingTests.swift */; };
 		9F89E0991DD4CBD600A22A6A /* SwiftThinking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F89E08B1DD4CBD600A22A6A /* SwiftThinking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F27203A1E0366A7003DCF45 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9F89E0881DD4CBD600A22A6A /* SwiftThinking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftThinking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F89E08B1DD4CBD600A22A6A /* SwiftThinking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftThinking.h; sourceTree = "<group>"; };
 		9F89E08C1DD4CBD600A22A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				9FA9B6D01DF1DB0C00FC9CC9 /* FullNeuronLayer.swift */,
 				9FA9B6D41DF663AE00FC9CC9 /* ConvolutionLayer.swift */,
 				9FA9B6CE1DF1DAF900FC9CC9 /* ActivationFunction.swift */,
+				9F27203A1E0366A7003DCF45 /* Extensions.swift */,
 				9F89E0B21DD5833200A22A6A /* Imaging */,
 				9F89E0B01DD5803E00A22A6A /* Linear Algebra */,
 				9F89E0B11DD5805600A22A6A /* Extra */,
@@ -263,6 +266,7 @@
 				9FA9B6D11DF1DB0C00FC9CC9 /* FullNeuronLayer.swift in Sources */,
 				9F89E0AB1DD4CBE500A22A6A /* Matrix.swift in Sources */,
 				9F89E0AC1DD4CBE500A22A6A /* NeuralNetwork.swift in Sources */,
+				9F27203B1E0366A7003DCF45 /* Extensions.swift in Sources */,
 				9FA9B6D51DF663AE00FC9CC9 /* ConvolutionLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

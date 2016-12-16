@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct Vector<T: Numeric> {
-    typealias Element = T
+public struct Vector<T: Numeric> {
+    public typealias Element = T
     fileprivate var data: [Element]
     var size: Int {
         get {
@@ -47,14 +47,14 @@ extension Vector: Collection {
         return i + 1
     }
 
-    typealias Index = Int
+    public typealias Index = Int
 
-    subscript(index: Int) -> Element {
+    public subscript(index: Int) -> Element {
         return self.data[index]
     }
 
-    var startIndex: Int { return 0 }
-    var endIndex: Int { return self.data.count - 1 }
+    public var startIndex: Int { return 0 }
+    public var endIndex: Int { return self.data.count - 1 }
 }
 
 private extension Vector {
@@ -86,7 +86,7 @@ private extension Vector {
 
 }
 
-extension Vector {
+public extension Vector {
     func apply(function: @escaping (Element) -> Element) -> Vector<Element> {
         let newData = data.map { function($0) }
         return Vector(newData)
@@ -94,30 +94,30 @@ extension Vector {
 }
 
 // Add
-func + <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
+public func + <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
     return lhs.add(v: rhs)
 }
 
 // Subtract
-func - <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
+public func - <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
     return lhs.subtract(v: rhs)
 }
 
 // Times
-func * <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
+public func * <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T> {
     return lhs.cross(v: rhs)
 }
 
 // Dot
 infix operator **: MultiplicationPrecedence
 
-func ** <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> T {
+public func ** <T: Numeric>(lhs: Vector<T>, rhs: Vector<T>) -> T {
     return lhs.dot(v: rhs)
 }
 
 // Debugging
 extension Vector: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         return self.data.description
     }
 }

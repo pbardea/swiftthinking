@@ -29,13 +29,13 @@ class ConvolutionLayer: NeuronLayer {
     var synapticWeights: Matrix<Double>
     var activationFunction: ActivationFunction
     
-    var previousLayer: NeuronLayer? = nil
     var nextLayer: NeuronLayer? = nil
+    var previousLayer: NeuronLayer? = nil
     
     let stride: Int
     let padding: Padding
     let depth: Int
-    let borderMode: BorderMode
+    let borderMode: BorderMode = .zero
     
     enum Padding {
         case none
@@ -51,18 +51,19 @@ class ConvolutionLayer: NeuronLayer {
         self.stride = stride
         self.padding = padding
         self.depth = depth
-        synapticWeights = [Matrix<Double>.getRandomNumMatrixWithHeight(numInputsPerNeuron, byWidth: numNeurons)]
+        // synapticWeights = [Matrix<Double>.getRandomNumMatrixWithHeight(numInputsPerNeuron, byWidth: numNeurons)]
+        synapticWeights = Matrix<Double>.getRandomNumMatrixWithHeight(numInputsPerNeuron, byWidth: numNeurons)
         self.activationFunction = activationFunction
     }
     
-    func propogate(previousLayer: [Matrix<Double>]) -> [Matrix<Double>] {
+    func propogate(previousOutputs: Matrix<Double>) -> [Matrix<Double>] {
         // TODO:
-        return [Matrix<Double>()]
+        return [Matrix<Double>([[]])]
     }
     
     func backpropogate(layerDepth: Int, outputs: [Matrix<Double>], trainingSetOutputs: Matrix<Double>, withLayerDeltas deltaLayers: [Matrix<Double>] = []) -> [Matrix<Double>] {
         // TODO:
-        return [Matrix<Double>()]
+        return [Matrix<Double>([[]])]
     }
     
 }

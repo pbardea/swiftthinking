@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Numeric {
+public protocol Numeric {
     static func + (lhs: Self, rhs: Self) -> Self
     static func - (lhs: Self, rhs: Self) -> Self
     static func * (lhs: Self, rhs: Self) -> Self

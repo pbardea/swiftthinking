@@ -14,7 +14,7 @@ class FullNeuronLayer: NeuronLayer {
     var activationFunction: ActivationFunction
     
     init(numNeurons: Int, numInputsPerNeuron: Int, activationFunction: ActivationFunction = .sigmoid) {
-        synapticWeights = Matrix.getRandomNumMatrixWithHeight(numInputsPerNeuron, byWidth: numNeurons)
+        synapticWeights = Matrix<Double>.getRandomNumMatrixWithHeight(numInputsPerNeuron, byWidth: numNeurons)
         self.activationFunction = activationFunction
     }
     
