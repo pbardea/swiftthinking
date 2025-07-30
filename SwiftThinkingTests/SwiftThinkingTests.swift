@@ -9,6 +9,7 @@
 import XCTest
 @testable import SwiftThinking
 
+// Main test suite
 class SwiftThinkingTests: XCTestCase {
     
     /// Get painting neural net
