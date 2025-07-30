@@ -4,8 +4,14 @@ jobs:
   build-and-test:
     macos:
       xcode: 15.0.0
+    environment:
+      # Ensure we're using the correct platform
+      DEVELOPER_DIR: /Applications/Xcode-15.0.app/Contents/Developer
     steps:
       - checkout
+      - run:
+          name: Show Xcode version
+          command: xcodebuild -version
       - run:
           name: Build
           command: |
@@ -13,7 +19,9 @@ jobs:
               -project SwiftThinking.xcodeproj \
               -scheme SwiftThinking \
               -destination 'platform=macOS' \
-              -configuration Debug
+              -configuration Debug \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
       - run:
           name: Run tests
           command: |
@@ -21,7 +29,9 @@ jobs:
               -project SwiftThinking.xcodeproj \
               -scheme SwiftThinking \
               -destination 'platform=macOS' \
-              -configuration Debug
+              -configuration Debug \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
       - run:
           name: Generate test results
           command: |
@@ -30,7 +40,9 @@ jobs:
               -project SwiftThinking.xcodeproj \
               -scheme SwiftThinking \
               -destination 'platform=macOS' \
-              -resultBundlePath test-results/results.xcresult || true
+              -resultBundlePath test-results/results.xcresult \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO || true
       - store_test_results:
           path: test-results
       - store_artifacts:
