@@ -1,0 +1,43 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    macos:
+      xcode: 15.0.0
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: |
+            xcodebuild build \
+              -project SwiftThinking.xcodeproj \
+              -scheme SwiftThinking \
+              -destination 'platform=macOS' \
+              -configuration Debug
+      - run:
+          name: Run tests
+          command: |
+            xcodebuild test \
+              -project SwiftThinking.xcodeproj \
+              -scheme SwiftThinking \
+              -destination 'platform=macOS' \
+              -configuration Debug
+      - run:
+          name: Generate test results
+          command: |
+            mkdir -p test-results
+            xcodebuild test \
+              -project SwiftThinking.xcodeproj \
+              -scheme SwiftThinking \
+              -destination 'platform=macOS' \
+              -resultBundlePath test-results/results.xcresult || true
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build-and-test
