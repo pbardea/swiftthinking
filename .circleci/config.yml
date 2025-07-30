@@ -3,15 +3,14 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 15.0.0
-    environment:
-      # Ensure we're using the correct platform
-      DEVELOPER_DIR: /Applications/Xcode-15.0.app/Contents/Developer
+      xcode: 14.2.0  # Using a more stable version
     steps:
       - checkout
       - run:
           name: Show Xcode version
-          command: xcodebuild -version
+          command: |
+            xcode-select -p
+            xcodebuild -version
       - run:
           name: Build
           command: |
